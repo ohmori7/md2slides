@@ -7,6 +7,6 @@ Gem::Specification.new do |s|
 	s.authors	= ["Motoyuki OHMORI"]
 	s.email		= "ohmori@tottori-u.ac.jp"
 	s.files		= ["bin/md2slides"]
-	s.homepage	= "https://rubygems.org/gems/md2slides"
+	s.homepage	= "https://github.com/ohmori7/md2slides"
 	s.license	= "MIT"
 end
