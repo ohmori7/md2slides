@@ -40,7 +40,7 @@ and then execute:
 ```
 2. install ffmpeg if necessary (if producing video file).
 
-3. create an empty Google slide, and copy the URL.
+3. create an empty Google slide, share it with **client_email** user, and copy the URL.
 
 4. write a markdown file.
 ```
