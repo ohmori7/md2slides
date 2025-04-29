@@ -40,7 +40,14 @@ class Presentation
 		@drive_service.authorization = @authorizer
 
 		if @id
-			@presentation = @slides_service.get_presentation(@id)
+			begin
+				@presentation = @slides_service.get_presentation(@id)
+			rescue => e
+				require 'webrick'
+				raise(e, "#{e.message} (#{e.status_code} " +
+				    "#{WEBrick::HTTPStatus.reason_phrase(e.status_code)})\n" +
+				    "#{e.full_message}")
+			end
 		end
 
 		@requests = []
