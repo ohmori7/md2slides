@@ -56,3 +56,5 @@ narration text...
 ```
 bundle exec bin/md2slides doc/sample.md
 ```
+
+7. the Google presentation is updated, and the video is stored in `data/.`
