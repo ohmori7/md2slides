@@ -1,0 +1,39 @@
+#!/usr/bin/env ruby
+# coding: utf-8
+
+# Copyright (c) 2025 Motoyuki OHMORI All rights reserved.
+
+$:.unshift File.join(File.dirname(File.realpath(__FILE__)), '..', 'lib')
+
+require 'presentation'
+
+def usage(errmsg = nil)
+	puts "ERROR: #{errmsg}" if errmsg
+	puts <<~EOF
+Usage:
+	#{$progname} [-f] <file>
+	#{$progname} -h
+
+Description:
+	create a voice from a text using Google Text-To-Speech API.
+
+Argument:
+	-h:	output this message.
+
+BUGS:
+	only .txt is allowed for an input file for now.
+
+	EOF
+	exit 1
+end
+
+v = ARGV.shift
+case v
+when '-h'
+	usage
+when nil
+	usage
+end
+ifile = v
+filename = Presentation::text_to_speech(File.read(ifile), ifile)
+puts "save to #{filename}"

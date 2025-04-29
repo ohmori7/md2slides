@@ -1,0 +1,64 @@
+#!/usr/bin/env ruby
+# coding: utf-8
+
+# Copyright (c) 2025 Motoyuki OHMORI All rights reserved.
+
+$:.unshift File.join(File.dirname(File.dirname(File.realpath(__FILE__))), 'lib')
+
+require 'presentation'
+require 'md'
+
+def usage(errmsg = nil)
+	puts "ERROR: #{errmsg}" if errmsg
+	puts <<~EOF
+Usage:
+	#{$progname} [-f] <file> [<id>]
+	#{$progname} -h
+
+Description:
+	generate a Google Presentation file.
+
+Argument:
+	-h:	output this message.
+	<file>:	a file written in markdown
+	<id>:	a ID of a presentation
+
+BUGS:
+	only .md is allowed for an input file for now.
+
+	EOF
+	exit 1
+end
+
+v = ARGV.shift
+case v
+when '-h'
+	usage
+when nil
+	usage
+end
+
+path = v
+filename = File.basename(path)
+if filename =~ /^(.*)\.(md)$/i
+	name, ext = $1, $2
+else
+	raise("cannot find the file name extention: #{filename}")
+end
+
+md = MD.new(path)
+id = md.attributes[:id]
+if id.nil?
+	id = ARGV.shift
+	usage("No ID specified in the presentation and the argument") if ARGV.size != 0
+else
+	usage("ID duplicatedly specified!!") if ARGV.size != 0
+end
+
+presentation = Presentation.new(id)
+presentation.list
+presentation.update(md)
+#presentation.stick_out_check
+presentation.download
+presentation.generate_audio
+presentation.generate_video
