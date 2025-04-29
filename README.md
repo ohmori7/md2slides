@@ -6,7 +6,8 @@ Narration can be given as notes in slides, and the audio will be generated using
 ## Quick start
 1. Generate your Google API credentials and copy it to credentails.json:
 ```
-% cat >> config/credentials.json
+% mkdir ~/.config/gcloud
+% cat >> ~/.config/gcloud/credentials.json
 {
   "type": "service_account",
   "project_id": "project-id",
@@ -57,7 +58,7 @@ narration text...
 bundle exec bin/md2slides doc/sample.md
 ```
 
-7. the Google presentation is updated, and the video is stored in `data/`.
+7. the Google presentation is updated, and the video is stored in the current directory.
 
 ## Installation
 
