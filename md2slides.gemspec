@@ -35,11 +35,11 @@ Gem::Specification.new do |spec|
   spec.executables   = spec.files.grep(%r{^exe/}) { |f| File.basename(f) }
   spec.require_paths = ["lib"]
 
-  spec.add_development_dependency "googleauth"
-# spec.add_development_dependency "google-apis-people_v1"
-  spec.add_development_dependency "google-apis-slides_v1"
-  spec.add_development_dependency "google-apis-drive_v3"
-  spec.add_development_dependency "google-cloud-text_to_speech", "~>0.7.0"
+  spec.add_dependency "googleauth"
+# spec.add_dependency "google-apis-people_v1"
+  spec.add_dependency "google-apis-slides_v1"
+  spec.add_dependency "google-apis-drive_v3"
+  spec.add_dependency "google-cloud-text_to_speech", "~>0.7.0"
   spec.add_development_dependency "bundler", "~> 1.17"
   spec.add_development_dependency "rake", "~> 10.0"
   spec.add_development_dependency "rspec", "~> 3.0"
