@@ -1,10 +1,10 @@
 # md2slides
 *md2slides* generates a Google presentation from a markdown file.
 A video file of a presentation will be also generated, and it may contains narration if supplied.
-Narration can be given as notes in slides, and the audio will be generated using Google text-to-speech API.
+Narration can be given as notes in slides, and the audio will be generated using Google text-to-speech API and ffmpeg.
 
 # Quick start
-1. copy Google API credentails.json if necessary:
+1. Generate your Google API credentials and copy it to credentails.json:
 ```
 % cat >> config/credentials.json
 {
@@ -21,7 +21,7 @@ Narration can be given as notes in slides, and the audio will be generated using
 }
 ^D (this means CTRL + D)
 ```
-2. install ffmpeg if necessary (if producing video file automatically).
+2. install ffmpeg if necessary (if producing video file).
 
 3. install necessary gems.
 ```
@@ -57,4 +57,4 @@ narration text...
 bundle exec bin/md2slides doc/sample.md
 ```
 
-7. the Google presentation is updated, and the video is stored in `data/.`
+7. the Google presentation is updated, and the video is stored in `data/`.
