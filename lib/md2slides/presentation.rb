@@ -60,7 +60,7 @@ class Presentation
 
 	def existence_check
 		if ! exists?
-			raise("presentation (ID: #{@id})does not exists!!!")
+			raise("presentation (ID: #{@id}) does not exists!!!")
 		end
 	end
 
