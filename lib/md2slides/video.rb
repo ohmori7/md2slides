@@ -1,6 +1,9 @@
 require 'open3'
 
 class Presentation
+	VIDEO_FRAME_RATE = 1
+	VIDEO_ONLY_DURATION = 4
+
 	def generate_slide_video(i, dir)
 		img = __data_slide_path(i, '.png', dir)
 		audio = __data_slide_path(i, '.m4a', dir)
@@ -11,11 +14,11 @@ class Presentation
 			timeopt = '-shortest'
 		else
 			audioin = "-f lavfi -i aevalsrc=0"
-			timeopt = "-vframes 60"
+			timeopt = "-vframes #{VIDEO_FRAME_RATE * VIDEO_ONLY_DURATION}"
 		end
 		cmd = <<~CMD
 			ffmpeg -hide_banner -y				\
-			    -framerate 15 -loop 1 -i "#{img}"		\
+			    -framerate #{VIDEO_FRAME_RATE} -loop 1 -i "#{img}" \
 			    #{audioin} -map 0:v:0 -map 1:a:0		\
 			    -c:v libx264 -tune stillimage		\
 			    -c:a aac -ar #{AUDIO_RATE} -ac 1		\
