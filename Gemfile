@@ -2,10 +2,7 @@
 
 source "https://rubygems.org"
 
-gem 'googleauth'
-#gem 'google-apis-people_v1'
-gem 'google-apis-slides_v1'
-gem 'google-apis-drive_v3'
-gem 'google-cloud-text_to_speech', '~>0.7.0'
+git_source(:github) {|repo_name| "https://github.com/#{repo_name}" }
 
-# git_source(:github) {|repo_name| "https://github.com/#{repo_name}" }
+# Specify your gem's dependencies in md2slides.gemspec
+gemspec

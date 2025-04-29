@@ -3,7 +3,7 @@
 A video file of a presentation will be also generated, and it may contains narration if supplied.
 Narration can be given as notes in slides, and the audio will be generated using Google text-to-speech API and ffmpeg.
 
-# Quick start
+## Quick start
 1. Generate your Google API credentials and copy it to credentails.json:
 ```
 % cat >> config/credentials.json
@@ -58,3 +58,33 @@ bundle exec bin/md2slides doc/sample.md
 ```
 
 7. the Google presentation is updated, and the video is stored in `data/`.
+
+## Installation
+
+Add this line to your application's Gemfile:
+
+```ruby
+gem 'md2slides'
+```
+
+And then execute:
+
+    $ bundle
+
+Or install it yourself as:
+
+    $ gem install md2slides
+
+## Usage
+
+TODO: Write usage instructions here
+
+## Development
+
+After checking out the repo, run `bin/setup` to install dependencies. Then, run `rake spec` to run the tests. You can also run `bin/console` for an interactive prompt that will allow you to experiment.
+
+To install this gem onto your local machine, run `bundle exec rake install`. To release a new version, update the version number in `version.rb`, and then run `bundle exec rake release`, which will create a git tag for the version, push git commits and tags, and push the `.gem` file to [rubygems.org](https://rubygems.org).
+
+## Contributing
+
+Bug reports and pull requests are welcome on GitHub at https://github.com/ohmori7/md2slides.
