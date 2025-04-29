@@ -3,7 +3,7 @@ RSpec.describe Md2slides do
     expect(Md2slides::VERSION).not_to be nil
   end
 
-  it "does something useful" do
-    expect(false).to eq(true)
+  it "filename sanitization" do
+    expect(Presentation::filename_sanitize('abcdef/*?')).to eq('abcdef')
   end
 end
