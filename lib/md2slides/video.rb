@@ -6,9 +6,6 @@ class Presentation
 		audio = __data_slide_path(i, '.m4a', dir)
 		video = __data_slide_path(i, '.mp4', dir)
 
-		# XXX: Google Text to Speech produces this...
-		audiorate = 24000
-
 		if File.exists?(audio)
 			audioin = "-i \"#{audio}\""
 			timeopt = '-shortest'
@@ -21,7 +18,7 @@ class Presentation
 			    -framerate 15 -loop 1 -i "#{img}"		\
 			    #{audioin} -map 0:v:0 -map 1:a:0		\
 			    -c:v libx264 -tune stillimage		\
-			    -c:a aac -ar #{audiorate} -ac 1		\
+			    -c:a aac -ar #{AUDIO_RATE} -ac 1		\
 			    -pix_fmt yuv420p #{timeopt} "#{video}"
 		CMD
 		msg, errmsg, status = Open3.capture3(cmd)

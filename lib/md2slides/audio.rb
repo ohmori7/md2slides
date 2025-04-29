@@ -1,4 +1,7 @@
 class Presentation
+	# XXX: Google Text to Speech produces at this rate...
+	AUDIO_RATE = 24000
+
 	def generate_audio0(i, slide, dir)
 		print "slide \##{i + 1}: generating audio... "
 		notes = get_slide_note(slide)
@@ -13,14 +16,13 @@ class Presentation
 			#
 			heading_silence = 2
 			trailing_silence = 1
-			audiorate = 24000
 			cmd = <<~CMD
 				ffmpeg -hide_banner -y				\
 				    -f lavfi -t #{heading_silence}		\
-				    -i anullsrc=r=#{audiorate}:cl=mono		\
+				    -i anullsrc=r=#{AUDIO_RATE}:cl=mono		\
 				    -i #{opath}					\
 				    -f lavfi -t #{trailing_silence}		\
-				    -i anullsrc=r=#{audiorate}:cl=mono		\
+				    -i anullsrc=r=#{AUDIO_RATE}:cl=mono		\
 				    -filter_complex "[0:a][1:a][2:a]concat=n=3:v=0:a=1[out]"	\
 				    -map "[out]"				\
 				    -c:a aac -b:a 64k #{path}
