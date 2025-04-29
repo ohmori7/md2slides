@@ -71,7 +71,7 @@ narration text...
 
 6. execute.
 ```
-bundle exec bin/md2slides doc/sample.md
+% md2slides sample.md
 ```
 
 7. the Google presentation is updated, and the video is stored in the current directory.
