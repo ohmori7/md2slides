@@ -87,11 +87,12 @@ class MD
 		text.each_line do |l|
 			l.strip!
 			next if l.empty?
-			k, v = l.split(':')
-			if v.nil?
-				raise("ERROR: no value given: #{l}")
+			if l =~ /^([^:]+): *([^ ].*)$/
+				k, v = $1.strip, $2.strip
+				@attributes[k.to_sym] = v
+			else
+				raise("ERROR: invalid line in a header: #{l}")
 			end
-			@attributes[k.strip.to_sym] = v.strip
 		end
 	end
 

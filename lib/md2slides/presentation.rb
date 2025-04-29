@@ -19,8 +19,12 @@ class Presentation
 		s.gsub(/[\/\\:\*\?"<>\|]/, '')
 	end
 
-	def initialize(id = nil)
-		@id = id
+	def initialize(url = nil)
+		if url =~ %r{https://docs.google.com/presentation/d/([^\/ ]+).*$}
+			@id = $1
+		elsif url
+			raise("ERROR: invalid URL: #{url}")
+		end
 
 		@authorizer = Google::Auth::ServiceAccountCredentials.make_creds(
 			json_key_io: File.open(ENV['GOOGLE_APPLICATION_CREDENTIALS']),

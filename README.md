@@ -35,7 +35,7 @@ Narration can be given as notes in slides, and the audio will be generated using
 cat >> doc/sample.md
 ---
 title: hogehoge
-id: <Google slide ID>
+url: <Google presentation URL>
 ---
 # title of the first title page
 ## sub title or author's name(s)

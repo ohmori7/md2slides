@@ -11,16 +11,16 @@ def usage(errmsg = nil)
 	puts "ERROR: #{errmsg}" if errmsg
 	puts <<~EOF
 Usage:
-	#{$progname} [-f] <file> [<id>]
+	#{$progname} [-f] <file> [<URL or id>]
 	#{$progname} -h
 
 Description:
 	generate a Google Presentation file.
 
 Argument:
-	-h:	output this message.
-	<file>:	a file written in markdown
-	<id>:	a ID of a presentation
+	-h:		output this message.
+	<file>:		a file written in markdown
+	<URL or id>:	a URL or a ID of a presentation
 
 BUGS:
 	only .md is allowed for an input file for now.
@@ -46,15 +46,15 @@ else
 end
 
 md = MD.new(path)
-id = md.attributes[:id]
-if id.nil?
-	id = ARGV.shift
-	usage("No ID specified in the presentation and the argument") if ARGV.size != 0
+url = md.attributes[:url]
+if url.nil?
+	url = ARGV.shift
+	usage("No URL and ID specified in the presentation and the argument") if ARGV.size != 0
 else
-	usage("ID duplicatedly specified!!") if ARGV.size != 0
+	usage("URL or ID duplicatedly specified!!") if ARGV.size != 0
 end
 
-presentation = Presentation.new(id)
+presentation = Presentation.new(url)
 presentation.list
 presentation.update(md)
 #presentation.stick_out_check
