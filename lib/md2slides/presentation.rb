@@ -16,7 +16,7 @@ class Presentation
 	attr_reader :id
 
 	def self.filename_sanitize(s)
-		s.gsub(/[\/\\:\*\?"<>\|]/, '')
+		s&.gsub(/[\/\\:\*\?"<>\|]/, '')
 	end
 
 	def initialize(url = nil)
