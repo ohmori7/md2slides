@@ -40,14 +40,9 @@ and then execute:
 ```
 2. install ffmpeg if necessary (if producing video file).
 
-3. install necessary gems.
-```
-% bundle install --path vendor/bundle
-```
+3. create an empty Google slide, and copy the URL.
 
-4. create an empty Google slide.
-
-5. write a markdown file.
+4. write a markdown file.
 ```
 cat >> doc/sample.md
 ---
@@ -69,16 +64,20 @@ narration text...
 ^D (this means CTRL + D)
 ```
 
-6. execute.
+5. run the script.
 ```
 % md2slides sample.md
 ```
 
-7. the Google presentation is updated, and the video is stored in the current directory.
+the Google presentation is updated, and the video is stored in the current directory.
 
 ## Usage
 
 TODO: Write usage instructions here
+
+## TODO
+
+See [TODO.md](https://github.com/ohmori7/md2slides/blob/main/TODO.md "TODO.md")
 
 ## Development
 
