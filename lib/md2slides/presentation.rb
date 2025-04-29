@@ -356,9 +356,7 @@ class Presentation
 	end
 
 	def __data_path(basedir)
-		if basedir.nil?
-			basedir = File.join(BASEDIR, 'data')
-		end
+		basedir = '.' if basedir.nil?
 		title, subtitle = get_title
 		title = self.class.filename_sanitize(title)
 		subtitle = self.class.filename_sanitize(subtitle)
