@@ -1,6 +1,7 @@
 Gem::Specification.new do |s|
 	s.name		= "md2slides"
 	s.version	= "0.0.0"
+	s.executables	<< "md2slides"
 	s.summary	= "Markdown to presentation slides in ruby"
 	s.description	= "Markdown to presentation slides in ruby"
 	s.authors	= ["Motoyuki OHMORI"]
