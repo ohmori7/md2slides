@@ -6,8 +6,12 @@ Gem::Specification.new do |s|
 	s.description	= "Generate Google slides and its video file from a markdown file"
 	s.authors	= [ "Motoyuki OHMORI" ]
 	s.email		= "ohmori@tottori-u.ac.jp"
-	s.files		= [ "lib/md2slides.rb", "lib/md2slides/md.rb", "lib/md2sdlies/presentation.rb",
-			    "lib/text_to_speech.rb", "lib/audio.rb", "lib/video.rb", ]
+	s.files		= [ "lib/md2slides.rb",
+			    "lib/md2slides/md.rb",
+			    "lib/md2slides/presentation.rb",
+			    "lib/md2slides/text_to_speech.rb",
+			    "lib/md2slides/audio.rb",
+			    "lib/md2slides/video.rb", ]
 	s.homepage	= "https://github.com/ohmori7/md2slides"
 	s.license	= "MIT"
 end
