@@ -5,7 +5,7 @@
 
 $:.unshift File.join(File.dirname(File.dirname(File.realpath(__FILE__))), 'lib')
 
-require 'presentation'
+require 'md2slides'
 require 'md'
 
 def usage(errmsg = nil)
