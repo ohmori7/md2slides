@@ -6,7 +6,6 @@
 $:.unshift File.join(File.dirname(File.dirname(File.realpath(__FILE__))), 'lib')
 
 require 'md2slides'
-require 'md'
 
 def usage(errmsg = nil)
 	puts "ERROR: #{errmsg}" if errmsg
