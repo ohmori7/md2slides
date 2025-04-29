@@ -3,6 +3,22 @@
 A video file of a presentation will be also generated, and it may contains narration if supplied.
 Narration can be given as notes in slides, and the audio will be generated using Google text-to-speech API and ffmpeg.
 
+## Installation
+
+install by gem:
+
+    % gem install md2slides
+
+Or add this line to your application's Gemfile:
+
+```ruby
+gem 'md2slides'
+```
+
+and then execute:
+
+    $ bundle
+
 ## Quick start
 1. Generate your Google API credentials and copy it to credentails.json:
 ```
@@ -59,22 +75,6 @@ bundle exec bin/md2slides doc/sample.md
 ```
 
 7. the Google presentation is updated, and the video is stored in the current directory.
-
-## Installation
-
-Add this line to your application's Gemfile:
-
-```ruby
-gem 'md2slides'
-```
-
-And then execute:
-
-    $ bundle
-
-Or install it yourself as:
-
-    $ gem install md2slides
 
 ## Usage
 
