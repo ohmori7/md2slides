@@ -36,13 +36,13 @@ class Presentation
 		end
 
 		print "concatenate video files..."
-		videolist = File.join(dir, 'video-list.txt')
-		File.open(videolist, 'w') do |f|
+		videolist = 'video-list.txt'
+		File.open(File.join(dir, videolist), 'w') do |f|
 			@presentation.slides.each_with_index do |slide, i|
 				f.puts("file #{__data_slide_path(i, '.mp4')}")
 			end
 		end
-		video = File.join(dir, 'video.mp4')
+		video = 'video.mp4'
 		cmd = <<~CMD
 			cd "#{dir}" &&					\
 			    ffmpeg -hide_banner -y -f concat -safe 0	\
