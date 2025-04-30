@@ -3,13 +3,13 @@ class MD
 		include Enumerable
 
 		class Element
-			attr_reader :type, :value
-			def initialize(type, value)
-				@type, @value = type, value
+			attr_reader :type, :value, :attributes
+			def initialize(type, value, attributes)
+				@type, @value, @attributes = type, value, attributes
 			end
 
 			def to_s
-				"#{@type.to_s}: #{@value}"
+				"#{@type.to_s}: #{@value} (#{@attributes.map { |k, v| "#{k}: #{v}"}.join(",")})"
 			end
 		end
 
@@ -18,9 +18,9 @@ class MD
 			@comments = []
 		end
 
-		def add(type, value)
+		def add(type, value, attributes = nil)
 			return if value.nil? || value.empty?
-			@elements.push(Element.new(type, value))
+			@elements.push(Element.new(type, value, attributes))
 		end
 
 		def add_comment(c)
@@ -97,8 +97,8 @@ class MD
 	def parse_page(text)
 		@pages << page = Page.new
 		is_in_comment = false
-		text.each_line do |l|
-			l.strip!
+		text.each_line do |l0|
+			l = l0.strip
 			next if l.empty?
 			if is_in_comment
 				if l =~ /(.*) ?-->(.*)$/
@@ -116,7 +116,11 @@ class MD
 					h = "h#{sharps.size}"
 					page.add(h.to_sym, title)
 				when /^[-*] *(.*)$/
-					page.add(:li, $1)
+					s = $1
+					if l0 =~ /^( +).*$/
+						indent = { indent: $1.size }
+					end
+					page.add(:li, s, indent)
 				when /^<!-- *(.*)$/
 					l = $1
 					if l =~ /(.*) ?-->(.*)$/

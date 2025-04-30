@@ -345,7 +345,7 @@ class Presentation
 					when /^h([0-9]+)$/
 						n = $1.to_i - 1
 					else
-						n = 1
+						n = (e.attributes&.[](:indent).to_i / 2).to_i
 					end
 					"\t" * n + e.value
 				end.join("\n")
