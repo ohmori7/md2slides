@@ -63,6 +63,8 @@ class MD
 		end
 	end
 
+	include Enumerable
+
 	attr_reader :attributes
 
 	def initialize(path)
@@ -77,10 +79,6 @@ class MD
 
 	def each(&block)
 		@pages.each(&block)
-	end
-
-	def each_with_index(&block)
-		@pages.each_with_index(&block)
 	end
 
 	def parse_header(text)
