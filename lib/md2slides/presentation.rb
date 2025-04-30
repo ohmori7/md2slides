@@ -148,8 +148,7 @@ class Presentation
 			@slides_service.batch_update_presentation(@id, batch_update_request)
 			@requests = []
 		rescue => e
-			p e.body
-			raise e
+			raise(e, "#{e.body}\n#{e.full_message}")
 		end
 		@presentation = @slides_service.get_presentation(@id)
 	end
