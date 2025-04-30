@@ -3,8 +3,6 @@
 
 # Copyright (c) 2025 Motoyuki OHMORI All rights reserved.
 
-$:.unshift File.join(File.dirname(File.dirname(File.realpath(__FILE__))), 'lib')
-
 require 'md2slides'
 
 def usage(errmsg = nil)

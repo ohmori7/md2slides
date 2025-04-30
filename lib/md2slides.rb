@@ -1,5 +1,3 @@
-$:.unshift File.dirname(File.dirname(File.realpath(__FILE__)))
-
 module Md2slides
 	class Error < StandardError; end
 
