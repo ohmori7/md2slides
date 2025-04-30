@@ -20,6 +20,12 @@ class MD
 
 		def add(type, value, attributes = nil)
 			return if value.nil? || value.empty?
+			case type.to_s
+			when /^h([0-9]+)$/
+				n = $1.to_i - 1
+				attributes ||= {}
+				attributes[:indent] = n
+			end
 			@elements.push(Element.new(type, value, attributes))
 		end
 

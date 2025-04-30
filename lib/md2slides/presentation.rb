@@ -340,12 +340,8 @@ class Presentation
 				set_slide_subtitle(slide, page.subtitle)
 			else
 				texts = page.map do |e|
-					case e.type.to_s
-					when /^h([0-9]+)$/
-						n = $1.to_i - 1
-					else
-						n = (e.attributes&.[](:indent).to_i / 2).to_i
-					end
+					# calculate the indentation.
+					n = (e.attributes&.[](:indent).to_i / 2).to_i
 					"\t" * n + e.value
 				end.join("\n")
 				if texts.size > 0
