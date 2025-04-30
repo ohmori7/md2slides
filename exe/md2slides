@@ -9,7 +9,7 @@ def usage(errmsg = nil)
 	puts "ERROR: #{errmsg}" if errmsg
 	puts <<~EOF
 Usage:
-	#{$progname} [-f] <file> [<URL or id>]
+	#{$progname} <file> [<URL or id>]
 	#{$progname} -h
 
 Description:
