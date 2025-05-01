@@ -9,7 +9,11 @@ require 'md2slides'
 options = {}
 $opts = OptionParser.new do |opts|
 	progname = File.basename(__FILE__)
-	opts.banner = "Usage: #{progname} [options] <MD> [<URL or ID>]"
+	opts.banner = <<~EOF
+		Usage:
+			#{progname} [options] <MD> [<URL or ID>]
+			#{progname} -h
+	EOF
 	opts.on('-h', '--help', 'show usage') { options[:h] = true }
 	opts.parse!
 end
@@ -18,9 +22,8 @@ def usage(errmsg = nil)
 	puts "ERROR: #{errmsg}" if errmsg
 	puts <<~EOF
 #{$opts.banner}
-
 Description:
-	generate a Google Presentation file.
+	generate a Google presentation file.
 
 Argument:
 	-h:		output this message.
@@ -41,14 +44,15 @@ filename = File.basename(path)
 if filename =~ /^(.*)\.(md)$/i
 	name, ext = $1, $2
 else
-	raise("cannot find the file name extention: #{filename}")
+	usage("cannot find the file name extention: #{filename}")
 end
 
 md = MD.new(path)
 url = md.attributes[:url]
 if url.nil?
 	url = ARGV.shift
-	usage("No URL and ID specified in the presentation and the argument") if ARGV.size != 0
+	usage("No URL and ID specified in the presentation and the argument") if url.nil?
+	usage("extra arguments: #{ARGV.join(", ")}") if ! ARGV.nil
 else
 	usage("URL or ID duplicatedly specified!!") if ARGV.size != 0
 end
