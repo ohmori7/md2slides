@@ -11,7 +11,12 @@ $opts = OptionParser.new do |opts|
 	progname = File.basename(__FILE__)
 	opts.banner = <<~EOF
 		Usage:
-			#{progname} [options] <MD> [<URL or ID>]
+			#{progname} list <MD> [<URL or ID>]
+			#{progname} update <MD> [<URL or ID>]
+			#{progname} fetch <MD> [<URL or ID>]
+			#{progname} audio <MD> [<URL or ID>]
+			#{progname} video <MD> [<URL or ID>]
+			#{progname} deploy <MD> [<URL or ID>]
 			#{progname} -h
 	EOF
 	opts.on('-h', '--help', 'show usage') { options[:h] = true }
@@ -38,7 +43,8 @@ BUGS:
 end
 
 usage if options[:h]
-usage if ARGV.size < 1
+usage if ARGV.size < 2
+cmd = ARGV.shift
 path = ARGV.shift
 filename = File.basename(path)
 if filename =~ /^(.*)\.(md)$/i
@@ -58,9 +64,23 @@ else
 end
 
 presentation = Presentation.new(url)
-presentation.list
-presentation.update(md)
-#presentation.stick_out_check
-presentation.download
-presentation.generate_audio
-presentation.generate_video
+case cmd
+when 'list'
+	presentation.list
+when 'update'
+	presentation.update(md)
+	#presentation.stick_out_check
+when 'fetch'
+	presentation.download
+when 'audio'
+	presentation.generate_audio
+when 'video'
+	presentation.generate_video
+when 'deploy'
+	presentation.update(md)
+	presentation.download
+	presentation.generate_audio
+	presentation.generate_video
+else
+	usage("unknown command: #{cmd}")
+end
