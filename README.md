@@ -20,7 +20,10 @@ and then execute:
     $ bundle
 
 ## Quick start
-1. Generate your Google API credentials and copy it to credentails.json:
+1. Generate your Google API credentials on API service page of your Google cloud console:
+	https://console.cloud.google.com/apis/
+
+2. copy API credentials:
 ```
 % mkdir ~/.config/gcloud
 % cat >> ~/.config/gcloud/credentials.json
@@ -38,11 +41,12 @@ and then execute:
 }
 ^D (this means CTRL + D)
 ```
-2. install ffmpeg if necessary (if producing video file).
 
-3. create an empty Google slide, share it with **client_email** user, and copy the URL.
+3. install ffmpeg if necessary (if producing video file).
 
-4. write a markdown file.
+4. create an empty Google slide, share it with **client_email** user, and copy the URL.
+
+5. write a markdown file.
 ```
 cat >> doc/sample.md
 ---
@@ -64,7 +68,7 @@ narration text...
 ^D (this means CTRL + D)
 ```
 
-5. run the script.
+6. run the script.
 ```
 % md2slides sample.md
 ```
