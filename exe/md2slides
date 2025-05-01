@@ -3,22 +3,29 @@
 
 # Copyright (c) 2025 Motoyuki OHMORI All rights reserved.
 
+require 'optparse'
 require 'md2slides'
+
+options = {}
+$opts = OptionParser.new do |opts|
+	progname = File.basename(__FILE__)
+	opts.banner = "Usage: #{progname} [options] <MD> [<URL or ID>]"
+	opts.on('-h', '--help', 'show usage') { options[:h] = true }
+	opts.parse!
+end
 
 def usage(errmsg = nil)
 	puts "ERROR: #{errmsg}" if errmsg
 	puts <<~EOF
-Usage:
-	#{$progname} <file> [<URL or id>]
-	#{$progname} -h
+#{$opts.banner}
 
 Description:
 	generate a Google Presentation file.
 
 Argument:
 	-h:		output this message.
-	<file>:		a file written in markdown
-	<URL or id>:	a URL or a ID of a presentation
+	<MD>:		a file written in markdown
+	<URL or id>:	a URL or a ID of a Google presentation
 
 BUGS:
 	only .md is allowed for an input file for now.
@@ -27,15 +34,9 @@ BUGS:
 	exit 1
 end
 
-v = ARGV.shift
-case v
-when '-h'
-	usage
-when nil
-	usage
-end
-
-path = v
+usage if options[:h]
+usage if ARGV.size < 1
+path = ARGV.shift
 filename = File.basename(path)
 if filename =~ /^(.*)\.(md)$/i
 	name, ext = $1, $2
