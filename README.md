@@ -70,7 +70,7 @@ narration text...
 
 6. run the script.
 ```
-% md2slides sample.md
+% md2slides deploy sample.md
 ```
 
 the Google presentation is updated, and the video is stored in the current directory.
