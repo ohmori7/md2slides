@@ -2,9 +2,8 @@ class Presentation
 	# XXX: Google Text to Speech produces at this rate...
 	AUDIO_RATE = 24000
 
-	def generate_audio0(i, slide, dir)
+	def generate_audio0(i, notes, dir)
 		print "slide \##{i + 1}: generating audio... "
-		notes = get_slide_note(slide)
 		path = __data_slide_path(i, '.m4a', dir)
 		if notes
 			opath = __data_slide_path(i, '.mp3', dir)
@@ -43,10 +42,16 @@ class Presentation
 		end
 	end
 
-	def generate_audio(dir = nil)
+	def generate_audio(md, dir = nil)
 		dir = __data_path(dir)
-		@presentation.slides.each_with_index do |slide, i|
-			generate_audio0(i, slide, dir)
+		if true
+			md.each_with_index do |page, i|
+				generate_audio0(i, page.comments, dir)
+			end
+		else
+			@presentation.slides.each_with_index do |slide, i|
+				generate_audio0(i, get_slide_note(slide), dir)
+			end
 		end
 	end
 end
