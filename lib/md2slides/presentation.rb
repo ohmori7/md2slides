@@ -19,7 +19,9 @@ class Presentation
 		s&.gsub(/[\/\\:\*\?"<>\|]/, '')
 	end
 
-	def initialize(url = nil)
+	def initialize(md = nil)
+		@md = md
+		url = md&.attributes[:url]
 		if url =~ %r{https://docs.google.com/presentation/d/([^\/ ]+).*$}
 			@id = $1
 		elsif url
@@ -29,7 +31,6 @@ class Presentation
 		@authorizer = Google::Auth::ServiceAccountCredentials.make_creds(
 			json_key_io: File.open(ENV['GOOGLE_APPLICATION_CREDENTIALS']),
 			scope: GOOGLE_OAUTH_SCOPE)
-		@authorizer.fetch_access_token!
 
 		@slides_service = Google::Apis::SlidesV1::SlidesService.new
 		@slides_service.client_options.application_name = APPLICATION_NAME
@@ -39,20 +40,9 @@ class Presentation
 		@drive_service.client_options.application_name = APPLICATION_NAME
 		@drive_service.authorization = @authorizer
 
-		if @id
-			begin
-				@presentation = @slides_service.get_presentation(@id)
-			rescue => e
-				require 'webrick'
-				raise(e, "#{e.message} (#{e.status_code} " +
-				    "#{WEBrick::HTTPStatus.reason_phrase(e.status_code)})\n" +
-				    "#{e.full_message}")
-			end
-		end
-
 		@requests = []
 
-		# XXX: this script always runs by an API user...
+		# XXX: this seript always runs by an API user...
 		#people_service = Google::Apis::PeopleV1::PeopleServiceService.new
 		#people_service.authorization = @authorizer
 		#profile = people_service.get_person("people/me", person_fields: "names,emailAddresses")
@@ -61,8 +51,24 @@ class Presentation
 		#puts "#{name}: #{email}"
 	end
 
+	def __get_presentation
+		begin
+			@authorizer.fetch_access_token!
+			@presentation = @slides_service.get_presentation(@id)
+		rescue => e
+			require 'webrick'
+			raise(e, "#{e.message} (#{e.status_code} " +
+			    "#{WEBrick::HTTPStatus.reason_phrase(e.status_code)})\n" +
+			    "#{e.full_message}")
+		end
+	end
+
 	def exists?
-		@id && @presentation
+		return false if ! @id
+		if @presentation.nil?
+			__get_presentation
+		end
+		!! @presentation
 	end
 
 	def existence_check
@@ -359,7 +365,12 @@ class Presentation
 
 	def __data_path(basedir)
 		basedir = '.' if basedir.nil?
-		title, subtitle = get_title
+		if @md
+			title = @md.first.title
+			subtitle = @md.first.subtitle
+		elsif @presentation
+			title, subtitle = get_title
+		end
 		title = self.class.filename_sanitize(title)
 		subtitle = self.class.filename_sanitize(subtitle)
 		File.join(basedir, "#{title}-#{subtitle}-#{@id}")

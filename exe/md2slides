@@ -63,7 +63,7 @@ else
 	usage("URL or ID duplicatedly specified!!") if ARGV.size != 0
 end
 
-presentation = Presentation.new(url)
+presentation = Presentation.new(md)
 case cmd
 when 'list'
 	presentation.list
