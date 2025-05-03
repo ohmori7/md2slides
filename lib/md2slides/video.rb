@@ -32,8 +32,9 @@ class Presentation
 
 	def generate_video(dir = nil)
 		dir = __data_path(dir)
-		@presentation.slides.each_with_index do |slide, i|
-			print "slide \##{i + 1}: generating video..."
+		pages = @md&.size || @presentation&.slides&.size.to_i
+		for i in 1..pages
+			print "slide \##{i}: generating video..."
 			generate_slide_video(i, dir)
 			puts "done"
 		end
@@ -41,7 +42,7 @@ class Presentation
 		print "concatenate video files..."
 		videolist = 'video-list.txt'
 		File.open(File.join(dir, videolist), 'w') do |f|
-			@presentation.slides.each_with_index do |slide, i|
+			for i in 1..pages
 				f.puts("file #{__data_slide_path(i, '.mp4')}")
 			end
 		end

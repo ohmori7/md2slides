@@ -3,7 +3,7 @@ class Presentation
 	AUDIO_RATE = 24000
 
 	def generate_audio0(i, notes, dir)
-		print "slide \##{i + 1}: generating audio... "
+		print "slide \##{i}: generating audio... "
 		path = __data_slide_path(i, '.m4a', dir)
 		if notes
 			opath = __data_slide_path(i, '.mp3', dir)
@@ -46,11 +46,11 @@ class Presentation
 		dir = __data_path(dir)
 		if @md
 			@md.each_with_index do |page, i|
-				generate_audio0(i, page.comments, dir)
+				generate_audio0(i + 1, page.comments, dir)
 			end
 		else
 			@presentation.slides.each_with_index do |slide, i|
-				generate_audio0(i, get_slide_note(slide), dir)
+				generate_audio0(i + 1, get_slide_note(slide), dir)
 			end
 		end
 	end

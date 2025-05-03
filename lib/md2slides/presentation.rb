@@ -377,7 +377,7 @@ class Presentation
 	end
 
 	def __data_slide_path(i, ext, basedir = nil)
-		path = "slide-#{i + 1}#{ext}"
+		path = "slide-#{i}#{ext}"
 		if basedir
 			path = File.join(basedir, path)
 		end
@@ -432,7 +432,7 @@ class Presentation
 		File.open(lockfile, File::RDWR|File::CREAT, 0644) do |f|
 			f.flock(File::LOCK_EX | File::LOCK_NB)
 			@presentation.slides.each_with_index do |slide, i|
-				download_slide(i, slide, dir)
+				download_slide(i + 1, slide, dir)
 			end
 		end
 	end

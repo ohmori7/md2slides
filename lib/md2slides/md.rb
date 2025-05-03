@@ -87,6 +87,10 @@ class MD
 		@pages.each(&block)
 	end
 
+	def size
+		@pages.size
+	end
+
 	def parse_header(text)
 		text.each_line do |l|
 			l.strip!
