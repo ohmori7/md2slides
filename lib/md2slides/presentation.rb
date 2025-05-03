@@ -311,7 +311,7 @@ class Presentation
 		puts "title: #{@presentation.title}"
 		puts "pages: #{@presentation.slides.size}"
 		@presentation.slides.each_with_index do |slide, i|
-			puts "- Slide \##{i + 1} contains #{slide.page_elements.count} elements."
+			puts "- slide \##{i + 1} contains #{slide.page_elements.count} elements."
 		end
 	end
 
