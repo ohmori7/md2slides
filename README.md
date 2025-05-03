@@ -79,6 +79,11 @@ the Google presentation is updated, and the video is stored in the current direc
 
 TODO: Write usage instructions here
 
+## Narration text format
+Narration text can be a normal text, and automatically enclosed by <speak>~</speak>.
+Narration text can contain tags of Speech Synthesis Markup Language (SSML).
+For more information on SSML, see https://www.w3.org/TR/speech-synthesis/.
+
 ## TODO
 
 See [TODO.md](https://github.com/ohmori7/md2slides/blob/main/TODO.md "TODO.md")
