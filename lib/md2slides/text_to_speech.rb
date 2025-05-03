@@ -16,9 +16,14 @@ class Presentation
 		end
 		filename += '.mp3'
 
+		text.strip!
+		if text !~ /^<speak>/
+			text = "<speak>#{text}</speak>"
+		end
+
 		response = Google::Cloud::TextToSpeech.new.synthesize_speech(
 		    # XXX: I don't know how to create an object of Google::Cloud::TextToSpeech::SynthesisInput...
-		    { text: text },
+		    { ssml: text },
 		    #
 		    # Standard is the cheapest.
 		    #	ja-JP-Standard-A, B female
