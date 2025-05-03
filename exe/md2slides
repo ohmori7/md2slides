@@ -68,18 +68,18 @@ case cmd
 when 'list'
 	presentation.list
 when 'update'
-	presentation.update(md)
+	presentation.update
 	#presentation.stick_out_check
 when 'fetch'
 	presentation.download
 when 'audio'
-	presentation.generate_audio(md)
+	presentation.generate_audio
 when 'video'
 	presentation.generate_video
 when 'deploy'
-	presentation.update(md)
+	presentation.update
 	presentation.download
-	presentation.generate_audio(md)
+	presentation.generate_audio
 	presentation.generate_video
 else
 	usage("unknown command: #{cmd}")

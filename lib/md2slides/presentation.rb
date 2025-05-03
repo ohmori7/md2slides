@@ -323,14 +323,14 @@ class Presentation
 		end
 	end
 
-	def update(md)
+	def update
 		#
 		# XXX: currently, clear all slides...
 		#
 		if exists?
 			clear
 		end
-		md.each do |page|
+		@md.each do |page|
 			if page.title_subtitle_only?
 				layout = 'TITLE'
 			elsif page.title_only?

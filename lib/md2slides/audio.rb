@@ -42,10 +42,10 @@ class Presentation
 		end
 	end
 
-	def generate_audio(md, dir = nil)
+	def generate_audio(dir = nil)
 		dir = __data_path(dir)
-		if true
-			md.each_with_index do |page, i|
+		if @md
+			@md.each_with_index do |page, i|
 				generate_audio0(i, page.comments, dir)
 			end
 		else
