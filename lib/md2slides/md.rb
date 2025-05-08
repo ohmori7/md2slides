@@ -125,6 +125,9 @@ class MD
 				end
 			else
 				case l
+				when /^!.*$/
+					# XXX: here, we treat ``!'' as comment out.
+					next
 				when /^(#+) *(.*)$/
 					sharps, title = $1, $2
 					h = "h#{sharps.size}"
