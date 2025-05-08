@@ -64,6 +64,10 @@ class MD
 			title_subtitle_only? && @elements[1]&.value
 		end
 
+		def empty?
+			@elements.empty? && @comments.empty?
+		end
+
 		def each(&block)
 			@elements.drop(has_title? ? 1 : 0).each(&block)
 		end
@@ -105,7 +109,7 @@ class MD
 	end
 
 	def parse_page(text)
-		@pages << page = Page.new
+		page = Page.new
 		is_in_comment = false
 		text.each_line do |l0|
 			l = l0.strip
@@ -145,6 +149,9 @@ class MD
 					page.add(:p, l)
 				end
 			end
+		end
+		if ! page.empty?
+			@pages << page
 		end
 	end
 
